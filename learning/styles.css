@@ -1,111 +1,101 @@
-:root{
-    --lightblue : rgb(114, 203, 255);
-    --darkblue : rgb(0, 58, 92);
-
-    --shadedbisque: rgb(253, 201, 137);
-}
-@font-face {
-    font-family: 'font-asli';
-    src: url(../assets/fonts/Pashtu\ Outline_MRT.ttf);
-}
 body{
-    background-color: rgb(40, 40, 40);
-    /* font-family: 'font-asli'; */
-}
-.my-button{
-    align-items: center;
-    width: 500px;
-    height: 500px;
-    color: red;
-    /* background: linear-gradient(90deg, black, white); */
-    background-color: bisque;
-    font-size: 40px;
-    padding: 12px 18px;
-    margin: 12px 0px;
-    border-radius: 20px;
-    border: 3px solid red;
-    box-shadow: 5px 5px 0px 3px red;
-    transition: 0.4s all;
-    outline: none;
-}
-.my-button:hover{
     background-color: white;
-    transform: scale(1.05);
-    box-shadow: 8px 8px 0px 3px red;
-}
+    width: 100%;
+    height: 100vh;
 
 
-/* ====================================================================== */
+    display: flex;
 
-.container{
+    flex-direction: row;
 
-    margin: 30px auto;
-    width: 800px;
-    height: fit-content;
-    background-color: bisque;
-    border: 3px solid brown;
-    border-radius: 25px;
-    padding: 30px;
-}
+    justify-content: space-around;
+    align-items: start; 
 
-.button-1{
-    width: fit-content;
-    background-color: var(--shadedbisque);
-    color: brown;
-    padding: 8px 12px;
-    border-radius: 20px;
-    border: 3px solid brown;
-
-    text-decoration: none;
-    
+    gap: 10px;
 
 }
 
-.center{
 
-    margin: 0 auto;
-    width: fit-content; 
-
-}
-
-.parent-center{
-    text-align: center;
-}
-
-
-
-hr{
-    margin: 20px 0px;
-}
-
-.inner-box{
-    background-color: var(--shadedbisque);
-    padding: 15px 30px;
-    border-radius: 20px;
-    border: 3px solid brown;
-    
-}
-
-
-
-.button-1:hover{
-    
-}
-
-.button-hover:hover{
-    background-color: rgb(255, 187, 104);
-}
-
-ul{
-    list-style-type: none;  
-}
-
-.circle{
-    margin-top: 200px;
+.box{
     width: 200px;
-    height: 50px;
-    background-color: red ;
+    height: 200px;
+    background-color: green;
 
-    overflow: scroll;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: start;
 }
 
+
+img{
+    width: 100%;
+    height: 250px;
+}
+
+
+a{
+    color: black;
+    font-size: xx-large;
+    text-decoration: none;
+}
+
+.smaller-box{
+    width: 20px;
+    height: 20px;
+    background-color: red;
+}
+
+
+
+.card{
+
+    margin: 150px auto;
+    width: 300px;
+    height: fit-content;
+    box-shadow: 0px 0px 15px 4px rgba(0, 0, 0, 0.098);
+    border-radius: 25px;
+
+    overflow: hidden;
+
+    padding-bottom: 15px;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+    
+}
+
+.card h1{
+    margin: 15px 20px;
+
+}
+
+
+.card span{
+    margin-left: 10px;
+
+
+}
+
+.card h4{
+    margin: 0px 20px;
+
+}
+
+.product-row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    width: 100%;
+}
+
+
+.discounted{
+    text-decoration: line-through;
+    opacity: 0.3;
+}

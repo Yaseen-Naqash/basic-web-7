@@ -1,4 +1,91 @@
-h1{
-    color: #4f64b8;
+
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+:root{
+    --primary: #d2fdaf;
+    --secondary1: #A5D6A7;
+    --secondary2: #A5D6A7;
+    --accent: #1B5E20;
+
+    --text-color: #1B5E20;
+
+}
+
+@font-face {
+    font-family: 'title';
+    src: url(../assets/fonts/TeshrinAR+LT-Bold.otf);
+}
+@font-face {
+    font-family: 'text';
+    src: url(../assets/fonts/Digi\ Lalezar\ Plus.ttf);
+}
+
+h1,h2,h3,h4,h5,h6, strong{
+    font-family: 'main';
+    color: var(--text-color);
+}
+
+p,span,a,li{
+    font-family: 'text';
+    color: var(--text-color);
+    text-decoration: none;
+
+}
+
+body{
+    background-color: var(--primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: end;
+
+}
+
+
+nav{
+    /* background-color: var(--secondary2); */
+    background: url(../assets/banner.jpg);
+    background-size: cover; 
+    background-position: center;
+    background-repeat: no-repeat;
     
+    width: 90%;
+    height: 100px;
+    margin: 30px auto;
+    border-radius: 18px;
+    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.257);
+
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+nav a{
+    font-size: 35px;
+}
+nav img{
+    width: 100px;
+    mix-blend-mode: multiply;
+}
+nav input{
+    height: 40px;
+    width: 260px;
+    background-color: #d2fdaf;
+    border: 3px solid var(--accent);
+    border-radius: 15px;
+    padding: 8px;
+    outline: none;
+}
+
+header{
+    width: 100%;
+}
+header img{
+    width: 100%;
 }
