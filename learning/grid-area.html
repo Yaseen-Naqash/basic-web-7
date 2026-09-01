@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>grid</title>
+
+    <style>
+        body{
+            height: 200vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 200px;
+            grid-template-rows: 100px 1fr 1fr 1fr 100px;
+            grid-template-areas: "mynav mynav mynav mynav" 
+                                 "myheader myheader myheader myheader"
+                                 "mymain mymain mymain myfilter" 
+                                 "mymain mymain mymain myfilter" 
+                                 "myfooter myfooter myfooter myfooter";
+        } 
+
+
+        nav{
+            width: 100%;
+            height: 100%;
+            background-color: yellow;
+            grid-area: mynav;
+
+        }
+        header{
+            background-color: purple;
+            grid-area: myheader;
+
+        }
+        main{
+            background-color: blue;
+            grid-area: mymain;
+
+        }
+        footer{
+            background-color: red;
+            grid-area: myfooter;
+
+        }
+        .filter{
+            background-color: aqua;
+            grid-area: myfilter;
+        }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+
+    </nav>
+    <header>
+
+    </header>
+
+    <footer>
+
+    </footer>
+    <main>
+
+    </main>
+
+    <section class="filter">
+
+    </section>
+
+    
+</body>
+</html>

@@ -62,15 +62,15 @@ nav{
 
 
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     justify-content: space-around;
     align-items: center;
 
-    position: fixed;
-    top: 50px;
+    position: sticky;
+    top: 25px;
     /* left: 50%; */
-    right: 50%;
-    transform: translate(50%,0px);
+    right: auto;
+    /* transform: translate(50%,0px); */
 
 
 
@@ -79,6 +79,12 @@ nav{
 
 
     z-index: 9999;
+}
+
+.sticky-example{
+    position: sticky;
+    top: 50px;
+    left: 50px;
 }
 
 nav a{
@@ -107,9 +113,18 @@ header img{
 }
 
 header h1{
+    font-size: 48px;
     position: absolute;
-    bottom: 300px;
-    left: 500px;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+header h2{
+    font-size: 38px;
+    position: absolute;
+    top: 160px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 header a{
@@ -117,9 +132,10 @@ header a{
     padding: 8px 12px;
     border-radius: 12px;
 
-    position: fixed;
-    bottom: 50px;
-    left: 50px;
+    position: absolute;
+    top: 230px;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 main{
@@ -234,14 +250,21 @@ ul{
     color: var(--primary);
 }
 
-section{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
+.product-grid{
     padding: 50px 100px;
+    border: 3px solid  var(--accent);
+    border-radius: 25px;
+    width: 95%;
+    margin: 50px auto;
+
+    display: grid;
+
+    grid-template-columns: 1fr 1fr 1fr;
+    
+    
+
+
+    
 
 }
-
 
