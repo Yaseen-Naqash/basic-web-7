@@ -93,6 +93,8 @@ nav a{
 nav img{
     width: 100px;
     mix-blend-mode: multiply;
+    animation: myAnimation 3s infinite;
+
 }
 nav input{
     height: 40px;
@@ -136,6 +138,7 @@ header a{
     top: 230px;
     left: 50%;
     transform: translateX(-50%);
+
 }
 
 main{
@@ -260,11 +263,27 @@ ul{
     display: grid;
 
     grid-template-columns: 1fr 1fr 1fr;
-    
-    
-
-
-    
 
 }
+
+
+
+@keyframes myAnimation {
+    0%{
+        transform: translate(0px,0px);
+        background-color: red;
+    }
+    50%{
+        transform: translate(0px,5px);
+        background-color: blue;
+
+    }
+    100%{
+        transform: translate(0px,0px);
+        background-color: red;
+
+    }
+    
+}
+
 

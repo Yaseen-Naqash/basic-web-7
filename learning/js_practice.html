@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Practice Playground</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --secondary: #7c3aed;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --border: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .section {
+            background: #1e293b;
+
+            /* background: url(magicstudio-art\(3\).jpg);
+            background-size: cover;
+            background-repeat: no-repeat; */
+            
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            border: 1px solid #334155;
+        }
+
+        .section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #334155;
+            font-size: 1.3rem;
+        }
+
+        .section h3 {
+            color: #94a3b8;
+            margin: 1rem 0 0.5rem 0;
+            font-size: 1rem;
+        }
+
+        /* Buttons Section */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-success { background: var(--success); color: white; }
+        .btn-danger { background: var(--danger); color: white; }
+        .btn-warning { background: var(--warning); color: var(--dark); }
+
+        .btn-outline { 
+            background: transparent; 
+            color: var(--primary); 
+            border: 2px solid var(--primary); 
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Input Section */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .input-field {
+            padding: 0.7rem 1rem;
+            border: 2px solid #334155;
+            border-radius: 6px;
+            background: #0f172a;
+            color: #e2e8f0;
+            font-size: 0.95rem;
+            transition: border-color 0.3s;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        textarea.input-field {
+            resize: vertical;
+            min-height: 80px;
+            font-family: inherit;
+        }
+
+        select.input-field {
+            cursor: pointer;
+        }
+
+        /* List Section */
+        .list-container {
+            background: #0f172a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .list-item {
+            padding: 0.8rem;
+            background: #1e293b;
+            margin-bottom: 0.5rem;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #334155;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .list-item:hover {
+            background: #2d3a4f;
+        }
+
+        .list-item.completed {
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+
+        .delete-btn {
+            background: var(--danger);
+            color: white;
+            border: none;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        /* Card Section */
+        .card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .card-content {
+            margin: 1rem 0;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            border: 1px solid #334155;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            color: #94a3b8;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            background: #0f172a;
+            border-radius: 10px;
+            height: 10px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--success));
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Tabs */
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #334155;
+            margin-bottom: 1rem;
+        }
+
+        .tab {
+            padding: 0.7rem 1.5rem;
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            border-bottom-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Notification */
+        .notification {
+            display: none;
+            width: 500px;
+            height: 70px;
+            background-color: red;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            z-index: 2000;
+            animation: slideIn 0.3s ease;
+            max-width: 350px;
+        }
+
+        .notification-success { background: var(--success); color: white; }
+        .notification-error { background: var(--danger); color: white; }
+        .notification-info { background: var(--primary); color: white; }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Accordion */
+        .accordion-item {
+            border: 1px solid #334155;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            overflow: hidden;
+        }
+
+        .accordion-header {
+            background: #0f172a;
+            padding: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+        }
+
+        .accordion-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .accordion-content.open {
+            padding: 1rem;
+            max-height: 500px;
+        }
+
+        /* Tooltip */
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .tooltip {
+            visibility: hidden;
+            background: var(--dark);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            font-size: 0.85rem;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: var(--dark);
+        }
+
+        .tooltip-container:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Form */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.3rem;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .checkbox-group, .radio-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        /* Drag & Drop */
+        .drag-container {
+            background: #0f172a;
+            border-radius: 8px;
+            padding: 1rem;
+            min-height: 100px;
+            border: 2px dashed #334155;
+        }
+
+        .draggable-item {
+            background: #1e293b;
+            padding: 0.8rem;
+            margin-bottom: 0.5rem;
+            border-radius: 6px;
+            cursor: move;
+            border: 1px solid #334155;
+            user-select: none;
+        }
+
+        .draggable-item.dragging {
+            opacity: 0.5;
+            border-color: var(--primary);
+        }
+
+        /* Counter */
+        .counter-display {
+            font-size: 3rem;
+            text-align: center;
+            font-weight: bold;
+            margin: 1rem 0;
+            color: var(--primary);
+        }
+
+        /* Color Picker */
+        .color-display {
+            width: 100%;
+            height: 100px;
+            border-radius: 8px;
+            margin: 1rem 0;
+            transition: background-color 0.3s;
+        }
+
+        /* Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+        }
+
+        .data-table th {
+            background: #0f172a;
+            color: var(--primary);
+        }
+
+        .data-table tr:hover {
+            background: #2d3a4f;
+        }
+
+        /* Stats cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .stat-card {
+            background: #0f172a;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        /* Console output area */
+        .console-output {
+            background: #000;
+            color: #10b981;
+            padding: 1rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            min-height: 100px;
+            max-height: 200px;
+            overflow-y: auto;
+            margin: 1rem 0;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .badge-primary { background: var(--primary); color: white; }
+        .badge-success { background: var(--success); color: white; }
+        .badge-warning { background: var(--warning); color: var(--dark); }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        .toggle-class{
+            padding: 8px;
+            border: 3px solid white;
+            border-radius: 8px;
+            margin: 5px;
+
+        }
+
+    </style>
+</head>
+<body>
+    
+    <!-- Header -->
+    <header class="header">
+        <h1>🎯 JavaScript Practice Playground</h1>
+        <p>All HTML & CSS ready - Add your JavaScript below!</p>
+    </header>
+
+    <div class="container">
+        <!-- 1. DOM Selection & Manipulation -->
+        <section class="section">
+            <h2>1. DOM Selection & Manipulation</h2>
+            <p id="text1">This paragraph has ID: demo-paragraph</p>
+            <p class="demo-class" id="text2">This has class: demo-class</p>
+            <p class="demo-class" id="text3">Another element with class: demo-class</p>
+            <div data-custom="test">This div has a data attribute: data-custom="test"</div>
+            <div class="btn-group">
+                <button class="btn btn-primary" id="changeTextBtn" onclick="change_text()">Change Text</button>
+                <button class="btn btn-outline" id="changeColorBtn" onclick="change_color()">Change Color</button>
+                <button class="btn btn-warning" id="toggleClassBtn" onclick="toggle_class()">Toggle Class</button>
+                <button class="btn btn-outline" id="showNotif" onclick="show_notif()">show notif</button>
+            </div>
+            <div id="dynamic-content"></div>
+        </section>
+
+        <!-- 2. Event Handling -->
+        <section class="section">
+            <h2>2. Event Handling</h2>
+            <div class="btn-group">
+                <button class="btn btn-primary" id="clickEvent">Click Event</button>
+                <button class="btn btn-success" id="dblClickEvent">Double Click</button>
+                <button class="btn btn-warning" id="mouseOverEvent">Mouse Over</button>
+                <button class="btn btn-danger" id="keyEventDemo">Key Events (focus me + press key)</button>
+            </div>
+            <div class="input-group">
+                <input type="text" class="input-field" id="eventInput" placeholder="Type here for input event...">
+                <input type="text" class="input-field" id="focusBlurInput" placeholder="Focus/Blur events...">
+            </div>
+            <p>Mouse Coordinates: <span id="mouse-coords">Move mouse here</span></p>
+            <div id="event-log" class="console-output" style="font-size: 0.8rem;">Event log will appear here...</div>
+        </section>
+
+        <!-- 3. Forms & Validation -->
+        <section class="section">
+            <h2>3. Forms & Validation</h2>
+            
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" class="input-field" placeholder="Enter username" minlength="3" required>
+                    <br><strong style="color: red; margin: px; display: none;" id="error_username"> this is a error</strong>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" class="input-field" placeholder="Enter email" required>
+                    <br><strong style="color: red; margin: px; display: none;"> this is a error</strong>
+                    
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" class="input-field" placeholder="Enter password" minlength="6">
+                    <br><strong style="color: red; margin: px; display: none;"> this is a error</strong>
+                </div>
+                <div class="form-group">
+                    <label for="country">Country:</label>
+                    <select id="country" class="input-field">
+                        <option value="">Select country...</option>
+                        <option value="us">United States</option>
+                        <option value="uk">United Kingdom</option>
+                        <option value="ca">Canada</option>
+                        <option value="au">Australia</option>
+                    </select>
+                </div>
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="agreeTerms">
+                    <label for="agreeTerms">I agree to terms</label>
+                </div>
+                <div class="form-group radio-group">
+                    <input type="radio" name="gender" id="male" value="male">
+                    <label for="male">Male</label>
+                    <input type="radio" name="gender" id="female" value="female">
+                    <label for="female">Female</label>
+                </div>
+                <button type="submit" onclick="submit()" class="btn btn-primary">Submit Form</button>
+                <button type="reset" class="btn btn-outline">Reset</button>
+            
+            <div id="form-output"></div>
+        </section>
+
+
+
+        <!-- 5. API Calls & Async -->
+        <section class="section">
+            <h2>5. Async & API Practice</h2>
+            <div class="btn-group">
+                <button class="btn btn-primary" id="fetchDataBtn">Fetch Data (JSONPlaceholder)</button>
+                <button class="btn btn-success" id="promiseBtn">Promise Demo</button>
+                <button class="btn btn-warning" id="asyncBtn">Async/Await Demo</button>
+            </div>
+            <div id="api-result" class="console-output">API results will appear here...</div>
+            <div id="loading-spinner" style="display:none; text-align:center; padding:1rem;">
+                Loading...
+            </div>
+        </section>
+
+        <!-- 6. Local Storage -->
+        <section class="section">
+            <h2>6. Local Storage Practice</h2>
+            <div class="input-group">
+                <input type="text" class="input-field" id="storageKey" placeholder="Key">
+                <input type="text" class="input-field" id="storageValue" placeholder="Value">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary" id="saveToStorage">Save to Storage</button>
+                <button class="btn btn-success" id="loadFromStorage">Load from Storage</button>
+                <button class="btn btn-danger" id="clearStorage">Clear All Storage</button>
+            </div>
+            <div id="storage-display" class="console-output">Storage contents will appear here...</div>
+        </section>
+
+        <!-- 7. Timers & Intervals -->
+        <section class="section">
+            <h2>7. clock </h2>
+            <div class="counter-display" id="time">00:00:00</div>
+            <div class="btn-group">
+                <button class="btn btn-success" id="startTimer">Start Timer</button>
+                <button class="btn btn-warning" id="pauseTimer">Pause</button>
+                <button class="btn btn-danger" id="stopTimer">Stop & Reset</button>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+            </div>
+        </section>
+
+
+
+        <!-- 9. Modal & UI Patterns -->
+        <section class="section">
+            <h2>9. Modal & Overlays</h2>
+            <button class="btn btn-primary" id="openModalBtn">Open Modal</button>
+            <button class="btn btn-success" id="showNotificationBtn">Show Notification</button>
+        </section>
+
+        <!-- 10. Tabs Component -->
+        <section class="section">
+            <h2>10. Tab Component</h2>
+            <div class="tabs" id="tabGroup">
+                <div class="tab active" data-tab="tab1">Tab 1</div>
+                <div class="tab" data-tab="tab2">Tab 2</div>
+                <div class="tab" data-tab="tab3">Tab 3</div>
+            </div>
+            <div class="tab-content active" id="tab1">Content for Tab 1 - Welcome!</div>
+            <div class="tab-content" id="tab2">Content for Tab 2 - Hello!</div>
+            <div class="tab-content" id="tab3">Content for Tab 3 - Goodbye!</div>
+        </section>
+
+        <!-- 11. Accordion -->
+        <section class="section">
+            <h2>11. Accordion</h2>
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    Section 1 <span>▼</span>
+                </div>
+                <div class="accordion-content">
+                    Content for section 1. This can be toggled open/closed.
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    Section 2 <span>▼</span>
+                </div>
+                <div class="accordion-content">
+                    Content for section 2. Another collapsible section.
+                </div>
+            </div>
+            <div class="accordion-item">
+                <div class="accordion-header">
+                    Section 3 <span>▼</span>
+                </div>
+                <div class="accordion-content">
+                    Content for section 3. Practice toggling multiple sections!
+                </div>
+            </div>
+        </section>
+
+        <!-- 12. Calculator / Complex Logic -->
+        <section class="section">
+            <h2>12. Complex Logic Practice</h2>
+            <div class="input-group" id="">
+                <input type="number" class="input-field" id="calcNum1" placeholder="Number 1">
+                <input type="number" class="input-field" id="calcNum2" placeholder="Number 2">
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-primary calc-btn" data-operation="add">Add (+)</button>
+                <button class="btn btn-success calc-btn" data-operation="subtract">Subtract (-)</button>
+                <button class="btn btn-warning calc-btn" data-operation="multiply">Multiply (×)</button>
+                <button class="btn btn-danger calc-btn" data-operation="divide">Divide (÷)</button>
+            </div>
+            <div class="counter-display" id="calcResult">0</div>
+        </section>
+
+        <!-- 13. Search & Filter -->
+        <section class="section">
+            <h2>13. Search & Filter</h2>
+            <input type="text" class="input-field" id="searchInput" placeholder="Search items...">
+            <div class="list-container" id="searchableList">
+                <div class="list-item"><span>Apple</span></div>
+                <div class="list-item"><span>Banana</span></div>
+                <div class="list-item"><span>Orange</span></div>
+                <div class="list-item"><span>Mango</span></div>
+                <div class="list-item"><span>Grapes</span></div>
+                <div class="list-item"><span>Pineapple</span></div>
+                <div class="list-item"><span>Watermelon</span></div>
+            </div>
+            <button onclick="search()">search </button>
+        </section>
+
+        <!-- 14. Table with Data -->
+        <section class="section">
+            <h2>14. Dynamic Table</h2>
+            <table class="data-table" id="dataTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>City</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <tr>
+                        <td>John Doe</td>
+                        <td>28</td>
+                        <td>New York</td>
+                        <td><button class="btn btn-danger btn-sm">Remove</button></td>
+                    </tr>
+                    <tr>
+                        <td>Jane Smith</td>
+                        <td>32</td>
+                        <td>London</td>
+                        <td><button class="btn btn-danger btn-sm">Remove</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button class="btn btn-primary" id="addRowBtn">Add Random Row</button>
+        </section>
+
+        <!-- 15. Color & Theme -->
+        <section class="section">
+            <h2>15. Theme & Style Manipulation</h2>
+            <input type="color" class="input-field" id="colorPicker" value="#4f46e5">
+            <div class="color-display" id="colorDisplay" style="background: #4f46e5;"></div>
+            <div class="btn-group">
+                <button class="btn btn-outline theme-btn" data-theme="dark">Dark Theme</button>
+                <button class="btn btn-outline theme-btn" data-theme="light">Light Theme</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- Stats Dashboard Section -->
+    <div class="container">
+        <section class="section">
+            <h2>16. Stats Dashboard (Object Practice)</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="statUsers">0</div>
+                    <div class="stat-label">Users</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statRevenue">$0</div>
+                    <div class="stat-label">Revenue</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statOrders">0</div>
+                    <div class="stat-label">Orders</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="statRating">0</div>
+                    <div class="stat-label">Rating</div>
+                </div>
+            </div>
+            <button class="btn btn-primary" id="updateStatsBtn">Update Random Stats</button>
+        </section>
+
+        <!-- Tooltips -->
+        <section class="section">
+            <h2>17. Tooltip & Hover Effects</h2>
+            <div class="tooltip-container">
+                <button class="btn btn-primary">Hover for Tooltip</button>
+                <div class="tooltip">This is a tooltip!</div>
+            </div>
+            <p style="margin-top: 1rem;">Tooltips use CSS only, but you can enhance with JS!</p>
+        </section>
+
+        <!-- Notification Area -->
+        <div class="notification" id="notification"></div>
+    </div>
+
+    <!-- Modal Structure -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <div class="modal-header">
+                <h3>Modal Title</h3>
+                <button class="close-btn" id="closeModalBtn">×</button>
+            </div>
+            <div class="modal-body">
+                <p>This is a modal dialog. Practice opening/closing with JavaScript!</p>
+                <p>Click the X or outside to close.</p>
+            </div>
+            <div class="btn-group" style="margin-top: 1rem;">
+                <button class="btn btn-primary" id="modalActionBtn">Confirm</button>
+                <button class="btn btn-outline" id="modalCancelBtn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Put your JavaScript here! -->
+
+
+    <script src="../js/scripts.js"></script>
+
+</body>
+</html>
