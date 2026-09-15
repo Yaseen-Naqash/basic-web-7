@@ -135,12 +135,57 @@ function search(){
 
 
     for(let i = 0; i<items.length; i++){
-        if(!items[i].textContent.includes(searchInput)){
+        if(!items[i].textContent.toLowerCase().includes(searchInput.toLowerCase())){
             items[i].style.display = 'none'
         }
 
     }
 }
 
+function modal_toggle(){
+    document.getElementById('modalOverlay').classList.toggle('modal-overlay-opened')
+}
+
+document.getElementById('tabButton1').addEventListener('click',function name(params) {
+    document.getElementById('tabButton1').classList.add('active')
+    document.getElementById('tabButton2').classList.remove('active')
+    document.getElementById('tabButton3').classList.remove('active')
+    
+    document.getElementById('tab1').classList.add('active')
+    document.getElementById('tab2').classList.remove('active')
+    document.getElementById('tab3').classList.remove('active')
+
+})
+
+document.getElementById('tabButton2').addEventListener('click',function name(params) {
+    document.getElementById('tabButton1').classList.remove('active')
+    document.getElementById('tabButton2').classList.add('active')
+    document.getElementById('tabButton3').classList.remove('active')
+    
+    document.getElementById('tab1').classList.remove('active')
+    document.getElementById('tab2').classList.add('active')
+    document.getElementById('tab3').classList.remove('active')
+
+})
+
+document.getElementById('tabButton3').addEventListener('click',function name(params) {
+    document.getElementById('tabButton1').classList.remove('active')
+    document.getElementById('tabButton2').classList.remove('active')
+    document.getElementById('tabButton3').classList.add('active')
+    
+    document.getElementById('tab1').classList.remove('active')
+    document.getElementById('tab2').classList.remove('active')
+    document.getElementById('tab3').classList.add('active')
+
+})
 
 
+document.getElementById('accordionHeader1').addEventListener('click',function name(params) {
+    document.getElementById('accordionContent1').classList.toggle('open')
+})
+document.getElementById('accordionHeader2').addEventListener('click',function name(params) {
+    document.getElementById('accordionContent2').classList.toggle('open')
+})
+document.getElementById('accordionHeader3').addEventListener('click',function name(params) {
+    document.getElementById('accordionContent3').classList.toggle('open')
+})

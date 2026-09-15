@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Profile Card</title>
+  <style>
+    /* reset & base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(145deg, #e8ecf1 0%, #d9e0e8 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    /* profile card */
+    .profile-card {
+      background-color: #ffffff;
+      max-width: 340px;
+      width: 100%;
+      border-radius: 28px;
+      padding: 2rem 1.8rem 2rem 1.8rem;
+      box-shadow: 
+        0 15px 30px -10px rgba(0, 20, 30, 0.25),
+        0 8px 15px -6px rgba(0, 0, 0, 0.05);
+      transition: transform 0.25s ease, box-shadow 0.3s ease;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.6);
+    }
+
+    .profile-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 
+        0 28px 40px -14px rgba(0, 20, 30, 0.35),
+        0 12px 22px -8px rgba(0, 0, 0, 0.1);
+    }
+
+    /* avatar */
+    .avatar-wrapper {
+      display: inline-block;
+      border-radius: 50%;
+      padding: 4px;
+      background: linear-gradient(135deg, #6a8cc7, #b0c6e0);
+      margin-bottom: 1.2rem;
+      box-shadow: 0 8px 16px -6px rgba(45, 70, 110, 0.3);
+    }
+
+    .avatar {
+      display: block;
+      width: 112px;
+      height: 112px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #ffffff;
+      background: #f0f4fa;
+      transition: transform 0.2s;
+    }
+
+    .profile-card:hover .avatar {
+      transform: scale(1.01);
+    }
+
+    /* name & role */
+    .profile-name {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: #1c2a3a;
+      line-height: 1.2;
+      margin-bottom: 0.25rem;
+    }
+
+    .profile-title {
+      font-size: 0.95rem;
+      font-weight: 500;
+      color: #4c6a8f;
+      background: #eef3fa;
+      display: inline-block;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      margin-bottom: 1rem;
+      letter-spacing: 0.3px;
+      border: 1px solid #d2e0f0;
+    }
+
+    /* bio */
+    .profile-bio {
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: #38506b;
+      margin-bottom: 1.6rem;
+      padding: 0 0.25rem;
+    }
+
+    /* meta row (location + joined) */
+    .meta-row {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      font-size: 0.85rem;
+      color: #5d6e82;
+      background: #f6f9fe;
+      padding: 0.7rem 0.2rem;
+      border-radius: 60px;
+      margin-bottom: 1.7rem;
+      border: 1px solid #e3ecf7;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .meta-item span:first-child {
+      font-size: 1.1rem;
+      line-height: 1;
+    }
+
+    /* buttons */
+    .button-group {
+      display: flex;
+      gap: 0.8rem;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 0.7rem 1.2rem;
+      border-radius: 40px;
+      transition: all 0.2s ease;
+      text-align: center;
+      cursor: pointer;
+      border: none;
+      flex: 1;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-primary {
+      background: #2e4a6b;
+      color: #ffffff;
+      box-shadow: 0 6px 12px -5px rgba(30, 50, 80, 0.3);
+      border: 1px solid #1f3a55;
+    }
+
+    .btn-primary:hover {
+      background: #1f3852;
+      box-shadow: 0 10px 18px -6px rgba(30, 50, 80, 0.4);
+      transform: scale(1.02);
+    }
+
+    .btn-secondary {
+      background: #ffffff;
+      color: #2e4a6b;
+      border: 1.5px solid #cbdae9;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.02);
+    }
+
+    .btn-secondary:hover {
+      background: #f2f7ff;
+      border-color: #8fa9c7;
+      transform: scale(1.02);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+    }
+
+    /* subtle divider (optional) */
+    .divider {
+      display: none;
+    }
+
+    /* responsive fine-tune */
+    @media (max-width: 360px) {
+      .profile-card {
+        padding: 1.6rem 1.2rem;
+      }
+      .profile-name {
+        font-size: 1.6rem;
+      }
+      .avatar {
+        width: 96px;
+        height: 96px;
+      }
+      .meta-row {
+        gap: 0.8rem;
+        font-size: 0.8rem;
+      }
+      .btn {
+        padding: 0.7rem 0.8rem;
+        font-size: 0.85rem;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="profile-card">
+    <!-- Avatar with gradient ring -->
+    <div class="avatar-wrapper">
+      <img 
+        id="image"
+        class="avatar" 
+        src="" 
+        alt="Eleanor Chen profile picture"
+      >
+    </div>
+
+    <!-- Name & title -->
+    <h2 class="profile-name" id="name">...</h2>
+    <div class="profile-title" id="email">...</div>
+
+    <!-- Bio -->
+    <p class="profile-bio">
+      Designing calm, human‑centered digital experiences. 
+      Crafting interfaces that feel like a breath of fresh air.
+    </p>
+
+    <!-- Meta info: location + joined -->
+    <div class="meta-row">
+      <div class="meta-item">
+        <span>📍</span>
+        <span id="city" class="city">...</span>
+      </div>
+      <div class="meta-item">
+        <span>🗓️</span>
+        <span>Joined 2021</span>
+      </div>
+    </div>
+
+    <!-- Action buttons -->
+    <div class="button-group">
+      <a href="#" class="btn btn-primary">Follow</a>
+      <a href="#" class="btn btn-secondary">Message</a>
+    </div>
+  </div>
+
+
+  <script>
+
+
+  </script>
+</body>
+</html>
