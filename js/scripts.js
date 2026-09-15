@@ -189,3 +189,22 @@ document.getElementById('accordionHeader2').addEventListener('click',function na
 document.getElementById('accordionHeader3').addEventListener('click',function name(params) {
     document.getElementById('accordionContent3').classList.toggle('open')
 })
+
+
+
+import OpenAI from 'https://esm.sh/openai';
+
+async function  aitest(){
+
+    const client = new OpenAI({
+        baseURL: 'https://api.gapgpt.app/v1',
+        apiKey: 'sk-fZZ2n0HbaxBeqVlCO4Q3YBxDTTYaonGQDuF1EvWPf1aFXxyO',
+        dangerouslyAllowBrowser: true   // <-- silences the error
+    });
+    const response = await client.chat.completions.create({
+    model: 'glm-4-flash',
+    messages: [{ role: 'user', content: 'سلام!' }]
+    });
+    console.log(response.choices[0].message.content);
+}
+aitest()
