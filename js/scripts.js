@@ -1,3 +1,4 @@
+import OpenAI from 'https://esm.sh/openai';
 
 // console.log("hello world")
 
@@ -95,6 +96,8 @@ mouseOverEvent.addEventListener('mouseleave', function name(params) {
 function submit(){
     let notification = document.getElementById('notification')
     let username = document.getElementById('username').value
+
+    
     
     let userame_regex = /^[A-Za-z1-9][A-Za-z1-9_]*$/
    if (!userame_regex.test(username)){
@@ -192,7 +195,6 @@ document.getElementById('accordionHeader3').addEventListener('click',function na
 
 
 
-import OpenAI from 'https://esm.sh/openai';
 
 async function  aitest(){
 
@@ -208,3 +210,27 @@ async function  aitest(){
     console.log(response.choices[0].message.content);
 }
 aitest()
+
+
+mylist = ['BMW', 'benz', 'ferrari']
+
+for(i=0 ; i<mylist.length ; i++){
+    console.log(mylist[i])
+}
+
+stringifiedList = JSON.stringify(mylist)
+
+localStorage.setItem('mylist', stringifiedList)
+
+mylist2 = localStorage.getItem('mylist')
+
+parsedList = JSON.parse(mylist2)
+
+for(i=0 ; i<parsedList.length ; i++){
+    console.log(parsedList[i])
+}
+
+
+
+fav_saraches = []
+fav_saraches.push('mobile')
