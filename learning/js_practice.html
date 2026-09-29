@@ -801,18 +801,7 @@
                     </tr>
                 </thead>
                 <tbody id="tableBody">
-                    <tr>
-                        <td>John Doe</td>
-                        <td>28</td>
-                        <td>New York</td>
-                        <td><button class="btn btn-danger btn-sm">Remove</button></td>
-                    </tr>
-                    <tr>
-                        <td>Jane Smith</td>
-                        <td>32</td>
-                        <td>London</td>
-                        <td><button class="btn btn-danger btn-sm">Remove</button></td>
-                    </tr>
+
                 </tbody>
             </table>
             <button class="btn btn-primary" id="addRowBtn" onclick="open_modal()">Add</button>
@@ -873,7 +862,7 @@
     </div>
 
     <!-- Modal Structure -->
-    <div class="modal-overlay" id="modalOverlay" style="display: flex;">
+    <div class="modal-overlay" id="modalOverlay">
         <div class="modal">
             <div class="modal-header">
                 <h3>Modal Title</h3>
@@ -895,7 +884,7 @@
                 </div>
             </div>
             <div class="btn-group" style="margin-top: 1rem;">
-                <button class="btn btn-primary" id="modalActionBtn">Confirm</button>
+                <button class="btn btn-primary" id="modalActionBtn" onclick="save()">Confirm</button>
                 <button class="btn btn-outline" id="modalCancelBtn" onclick="close_modal()">Cancel</button>
             </div>
         </div>
@@ -913,8 +902,75 @@
 
         }
 
+        function save(){
+            let name = document.getElementById('name').value
+            let age = document.getElementById('age').value
+            let city = document.getElementById('city').value
 
-        
+            let person = {
+                'name' : name,
+                'age' : age,
+                'city' : city
+            }
+
+            persons = JSON.parse(localStorage.getItem('persons'))
+
+            persons.push(person)
+
+            localStorage.setItem('persons', JSON.stringify(persons))
+
+
+        }
+
+        function render(){
+            let holder = document.getElementById('tableBody')
+            let persons = JSON.parse(localStorage.getItem('persons'))
+
+            for(let i=0; i<persons.length ;i++){
+
+               tr = document.createElement('tr')
+
+                let deleteHolder = document.createElement('td')
+                let deleteBTN = document.createElement('button')
+                deleteBTN.classList.add('btn-danger')
+                deleteBTN.classList.add('btn')
+                deleteBTN.classList.add('btn-sm')
+
+
+               deleteBTN.textContent = 'Remove'
+
+               deleteHolder.appendChild(deleteBTN)
+
+            
+               let name = document.createElement('td')
+               let age = document.createElement('td')
+               let city = document.createElement('td')
+
+
+               name.textContent = persons[i].name
+               tr.appendChild(name)
+
+               age.textContent = persons[i].age
+               tr.appendChild(age)
+
+               city.textContent = persons[i].city
+                tr.appendChild(city)
+
+                holder.appendChild(tr)
+
+
+               tr.appendChild(deleteHolder)
+
+            }
+
+            
+
+        }
+
+        render()
+
+
+
 
 
     </script>
