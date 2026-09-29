@@ -234,3 +234,9 @@ for(i=0 ; i<parsedList.length ; i++){
 
 fav_saraches = []
 fav_saraches.push('mobile')
+
+
+localStorage.setItem()
+localStorage.getItem()
+localStorage.remove()
+localStorage.clear()

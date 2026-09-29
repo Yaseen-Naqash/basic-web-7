@@ -815,7 +815,7 @@
                     </tr>
                 </tbody>
             </table>
-            <button class="btn btn-primary" id="addRowBtn">Add Random Row</button>
+            <button class="btn btn-primary" id="addRowBtn" onclick="open_modal()">Add</button>
         </section>
 
         <!-- 15. Color & Theme -->
@@ -873,19 +873,30 @@
     </div>
 
     <!-- Modal Structure -->
-    <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-overlay" id="modalOverlay" style="display: flex;">
         <div class="modal">
             <div class="modal-header">
                 <h3>Modal Title</h3>
                 <button class="close-btn" id="closeModalBtn" onclick="modal_toggle()">×</button>
             </div>
             <div class="modal-body">
-                <p>This is a modal dialog. Practice opening/closing with JavaScript!</p>
-                <p>Click the X or outside to close.</p>
+                <div class="form-group">
+                    <label for="username">name:</label>
+                    <input type="text" id="name" class="input-field" placeholder="Enter name" minlength="3" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">age:</label>
+                    <input type="text" id="age" class="input-field" placeholder="Enter age" required>
+                    
+                </div>
+                <div class="form-group">
+                    <label for="password">city:</label>
+                    <input type="text" id="city" class="input-field" placeholder="Enter city" minlength="6">
+                </div>
             </div>
             <div class="btn-group" style="margin-top: 1rem;">
                 <button class="btn btn-primary" id="modalActionBtn">Confirm</button>
-                <button class="btn btn-outline" id="modalCancelBtn">Cancel</button>
+                <button class="btn btn-outline" id="modalCancelBtn" onclick="close_modal()">Cancel</button>
             </div>
         </div>
     </div>
@@ -893,10 +904,20 @@
     <!-- Put your JavaScript here! -->
 
     <script>
+        function close_modal(){
+            document.getElementById('modalOverlay').style.display = 'none'
+
+        }
+        function open_modal(){
+            document.getElementById('modalOverlay').style.display = 'flex'
+
+        }
+
+
+        
 
 
     </script>
-    <script src="../js/scripts.js"></script>
 
 </body>
 </html>
