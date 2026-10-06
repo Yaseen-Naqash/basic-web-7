@@ -57,7 +57,7 @@
 
 
     </footer>
-<!-- 
+
     <script>
         let images = document.getElementById('images')
         let imageWidth = 1400
@@ -80,7 +80,7 @@
 
         }
         function prev(){
-            current = (current - 1) + maxImages;
+            current = (current - 1 + maxImages)  % maxImages;
             goToIndex(current)
 
             
@@ -89,7 +89,7 @@
 
 
     </script>
- -->
+
 
     
 </body>
