@@ -18,27 +18,57 @@
 
         body {
             font-family: 'Vazirmatn', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f8fafc;
-            color: #1e293b;
+            background-color: var(--bg);
+            color: var(--text);
             line-height: 1.7;
             direction: rtl;
             text-align: right;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* ===== VARIABLES ===== */
+        /* ===== VARIABLES — DUAL THEME ===== */
         :root {
-            --primary: #2563eb;
-            --primary-dark: #1d4ed8;
-            --primary-light: #dbeafe;
-            --secondary: #0f172a;
-            --accent: #f59e0b;
-            --gray-50: #f8fafc;
-            --gray-100: #f1f5f9;
-            --gray-200: #e2e8f0;
-            --gray-300: #cbd5e1;
-            --gray-600: #475569;
-            --gray-800: #1e293b;
+            /* روز (روشن) */
+            --primary-day: #2563eb;
+            --primary-dark-day: #1d4ed8;
+            --primary-light-day: #dbeafe;
+            --secondary-day: #0f172a;
+            --accent-day: #f59e0b;
+            --bg-day: #f8fafc;
+            --surface-day: #ffffff;
+            --surface-alt-day: #f1f5f9;
+            --text-day: #1e293b;
+            --text-muted-day: #475569;
+            --border-day: #e2e8f0;
+            --shadow-day: 0 1px 3px rgba(0,0,0,0.05), 0 4px 6px -1px rgba(0,0,0,0.1);
+
+            /* شب (تاریک) */
+            --primary-night: #3b82f6;
+            --primary-dark-night: #2563eb;
+            --primary-light-night: #1e3a8a;
+            --secondary-night: #e2e8f0;
+            --accent-night: #fbbf24;
+            --bg-night: #0f172a;
+            --surface-night: #1e293b;
+            --surface-alt-night: #334155;
+            --text-night: #f1f5f9;
+            --text-muted-night: #cbd5e1;
+            --border-night: #334155;
+            --shadow-night: 0 1px 3px rgba(0,0,0,0.3), 0 4px 6px -1px rgba(0,0,0,0.4);
+
+            /* متغیرهای فعال (پیش‌فرض: روز) */
+            --primary: var(--primary-day);
+            --primary-dark: var(--primary-dark-day);
+            --primary-light: var(--primary-light-day);
+            --secondary: var(--secondary-day);
+            --accent: var(--accent-day);
+            --bg: var(--bg-day);
+            --surface: var(--surface-day);
+            --surface-alt: var(--surface-alt-day);
+            --text: var(--text-day);
+            --text-muted: var(--text-muted-day);
+            --border: var(--border-day);
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.05);
             --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
@@ -46,6 +76,25 @@
             --radius: 16px;
             --radius-sm: 8px;
             --radius-full: 9999px;
+        }
+
+        /* حالت تاریک */
+        body.dark {
+            --primary: var(--primary-night);
+            --primary-dark: var(--primary-dark-night);
+            --primary-light: var(--primary-light-night);
+            --secondary: var(--secondary-night);
+            --accent: var(--accent-night);
+            --bg: var(--bg-night);
+            --surface: var(--surface-night);
+            --surface-alt: var(--surface-alt-night);
+            --text: var(--text-night);
+            --text-muted: var(--text-muted-night);
+            --border: var(--border-night);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.4), 0 2px 4px -1px rgba(0,0,0,0.3);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.5), 0 4px 6px -2px rgba(0,0,0,0.4);
+            --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.6), 0 10px 10px -5px rgba(0,0,0,0.5);
         }
 
         /* ===== CONTAINER ===== */
@@ -57,14 +106,15 @@
 
         /* ===== HEADER / NAV ===== */
         .navbar {
-            background: rgba(255,255,255,0.92);
+            background: var(--surface);
             backdrop-filter: blur(12px);
             box-shadow: var(--shadow-sm);
             position: sticky;
             top: 0;
             z-index: 1000;
             padding: 12px 0;
-            border-bottom: 1px solid var(--gray-200);
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s, border-color 0.3s;
         }
 
         .navbar .container {
@@ -101,7 +151,7 @@
 
         .nav-links a {
             text-decoration: none;
-            color: var(--gray-600);
+            color: var(--text-muted);
             font-weight: 500;
             font-size: 1.05rem;
             transition: color 0.2s;
@@ -126,12 +176,36 @@
             transform: translateY(-2px);
         }
 
+        /* ===== THEME TOGGLE ===== */
+        .theme-toggle {
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            color: var(--text);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            margin-right: 12px;
+        }
+
+        .theme-toggle:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
         /* ===== HERO ===== */
         .hero {
             padding: 80px 0 100px;
-            background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 100%);
+            background: linear-gradient(135deg, var(--surface-alt) 0%, var(--bg) 100%);
             position: relative;
             overflow: hidden;
+            transition: background 0.3s;
         }
 
         .hero::after {
@@ -141,9 +215,10 @@
             left: -50px;
             width: 400px;
             height: 400px;
-            background: radial-gradient(circle, rgba(37,99,235,0.04) 0%, transparent 70%);
+            background: radial-gradient(circle, var(--primary-light) 0%, transparent 70%);
             border-radius: 50%;
             pointer-events: none;
+            opacity: 0.6;
         }
 
         .hero .container {
@@ -182,7 +257,7 @@
 
         .hero-content p {
             font-size: 1.2rem;
-            color: var(--gray-600);
+            color: var(--text-muted);
             margin-bottom: 36px;
             max-width: 550px;
             line-height: 1.9;
@@ -203,7 +278,7 @@
             font-weight: 700;
             font-size: 1.1rem;
             transition: all 0.3s;
-            box-shadow: 0 8px 20px -6px rgba(37,99,235,0.4);
+            box-shadow: 0 8px 20px -6px var(--primary);
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -215,7 +290,7 @@
         .btn-primary:hover {
             background: var(--primary-dark);
             transform: translateY(-3px);
-            box-shadow: 0 12px 28px -6px rgba(37,99,235,0.5);
+            box-shadow: 0 12px 28px -6px var(--primary);
         }
 
         .btn-secondary {
@@ -230,7 +305,7 @@
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            border: 2px solid var(--gray-300);
+            border: 2px solid var(--border);
             cursor: pointer;
             white-space: nowrap;
         }
@@ -248,19 +323,21 @@
             align-items: center;
         }
 
-        .hero-image img {
+        .hero-image img,
+        .hero-image svg {
             width: 100%;
             max-width: 540px;
             border-radius: 28px;
             box-shadow: var(--shadow-xl);
-            border: 1px solid rgba(255,255,255,0.8);
+            border: 1px solid var(--border);
         }
 
         /* ===== STATS BAR ===== */
         .stats {
             background: var(--secondary);
             padding: 60px 0;
-            color: white;
+            color: var(--bg);
+            transition: background 0.3s;
         }
 
         .stats .container {
@@ -278,7 +355,7 @@
 
         .stat-item p {
             font-size: 1.1rem;
-            color: var(--gray-300);
+            color: var(--text-muted);
             font-weight: 400;
         }
 
@@ -297,7 +374,7 @@
 
         .section-title p {
             font-size: 1.2rem;
-            color: var(--gray-600);
+            color: var(--text-muted);
             max-width: 600px;
             margin: 0 auto;
         }
@@ -313,24 +390,25 @@
         /* ===== COURSES ===== */
         .courses {
             padding: 100px 0;
-            background: white;
+            background: var(--surface);
+            transition: background 0.3s;
         }
 
         .course-grid {
             width: 100%;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px , 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
             place-items: center;
             gap: 36px;
         }
 
         .course-card {
             width: 350px;
-            background: var(--gray-50);
+            background: var(--surface-alt);
             border-radius: var(--radius);
             padding: 36px 28px;
             transition: all 0.3s;
-            border: 1px solid var(--gray-200);
+            border: 1px solid var(--border);
             text-align: center;
             box-shadow: var(--shadow-sm);
         }
@@ -339,7 +417,7 @@
             transform: translateY(-10px);
             box-shadow: var(--shadow-xl);
             border-color: var(--primary-light);
-            background: white;
+            background: var(--surface);
         }
 
         .course-icon {
@@ -370,7 +448,7 @@
         }
 
         .course-card p {
-            color: var(--gray-600);
+            color: var(--text-muted);
             font-size: 1rem;
             margin-bottom: 24px;
             line-height: 1.8;
@@ -382,7 +460,7 @@
             gap: 28px;
             margin-bottom: 28px;
             font-size: 0.95rem;
-            color: var(--gray-600);
+            color: var(--text-muted);
         }
 
         .course-meta i {
@@ -400,7 +478,7 @@
         .course-price span {
             font-size: 1rem;
             font-weight: 400;
-            color: var(--gray-600);
+            color: var(--text-muted);
             text-decoration: line-through;
             margin-right: 10px;
         }
@@ -426,7 +504,8 @@
         /* ===== FEATURES ===== */
         .features {
             padding: 100px 0;
-            background: var(--gray-50);
+            background: var(--bg);
+            transition: background 0.3s;
         }
 
         .features-grid {
@@ -443,7 +522,7 @@
         .feature-icon {
             width: 70px;
             height: 70px;
-            background: white;
+            background: var(--surface);
             border-radius: 18px;
             display: flex;
             align-items: center;
@@ -469,14 +548,15 @@
         }
 
         .feature-item p {
-            color: var(--gray-600);
+            color: var(--text-muted);
             font-size: 0.98rem;
         }
 
         /* ===== TESTIMONIALS ===== */
         .testimonials {
             padding: 100px 0;
-            background: white;
+            background: var(--surface);
+            transition: background 0.3s;
         }
 
         .testimonial-grid {
@@ -486,10 +566,10 @@
         }
 
         .testimonial-card {
-            background: var(--gray-50);
+            background: var(--surface-alt);
             border-radius: var(--radius);
             padding: 32px 28px;
-            border: 1px solid var(--gray-200);
+            border: 1px solid var(--border);
             transition: all 0.3s;
             position: relative;
         }
@@ -497,7 +577,7 @@
         .testimonial-card:hover {
             box-shadow: var(--shadow-lg);
             border-color: var(--primary-light);
-            background: white;
+            background: var(--surface);
         }
 
         .testimonial-card .quote-icon {
@@ -511,7 +591,7 @@
 
         .testimonial-text {
             font-size: 1.05rem;
-            color: var(--gray-800);
+            color: var(--text);
             margin-bottom: 24px;
             line-height: 1.9;
             font-style: italic;
@@ -539,7 +619,7 @@
 
         .author-info span {
             font-size: 0.9rem;
-            color: var(--gray-600);
+            color: var(--text-muted);
         }
 
         .stars {
@@ -550,10 +630,11 @@
 
         /* ===== CTA BANNER ===== */
         .cta-banner {
-            background: linear-gradient(135deg, var(--primary) 0%, #1e40af 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             padding: 80px 0;
             color: white;
             text-align: center;
+            transition: background 0.3s;
         }
 
         .cta-banner h2 {
@@ -595,8 +676,9 @@
         /* ===== FOOTER ===== */
         .footer {
             background: var(--secondary);
-            color: var(--gray-300);
+            color: var(--text-muted);
             padding: 70px 0 30px;
+            transition: background 0.3s, color 0.3s;
         }
 
         .footer-grid {
@@ -607,7 +689,7 @@
         }
 
         .footer-col h4 {
-            color: white;
+            color: var(--bg);
             font-size: 1.2rem;
             font-weight: 700;
             margin-bottom: 22px;
@@ -628,7 +710,7 @@
         }
 
         .footer-col ul a {
-            color: var(--gray-300);
+            color: var(--text-muted);
             text-decoration: none;
             transition: color 0.2s;
             font-size: 0.98rem;
@@ -683,7 +765,7 @@
         }
 
         .newsletter input::placeholder {
-            color: var(--gray-400);
+            color: #94a3b8;
         }
 
         .newsletter input:focus {
@@ -726,38 +808,39 @@
             opacity: 1;
             transform: translateY(0);
         }
-        .container strong{
+
+        .container strong {
             rotate: 90deg;
             font-size: xx-large;
             cursor: pointer;
             display: none;
             color: var(--primary-dark);
         }
-        .mobile-menu{
-            background-color: white;
+
+        .mobile-menu {
+            background-color: var(--surface);
             width: 300px;
             height: 100vh;
             box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.144);
-
             position: fixed;
             left: -500px;
             top: 0;
             z-index: 9999;
-
             display: flex;
             flex-direction: column;
             justify-content: start;
             align-items: start;
-
             transition: all 0.6s;
         }
-        .mobile-menu strong{
+
+        .mobile-menu strong {
             margin: 20px;
             font-size: xx-large;
             color: var(--primary-dark);
             cursor: pointer;
         }
-        .menu-open{
+
+        .menu-open {
             left: 0px;
         }
 
@@ -773,7 +856,7 @@
 
         .mobile-links a {
             text-decoration: none;
-            color: var(--gray-600);
+            color: var(--text-muted);
             font-weight: 500;
             font-size: 1.05rem;
             transition: color 0.2s;
@@ -782,91 +865,70 @@
         .mobile-links a:hover {
             color: var(--primary);
         }
-        .container-nav{
+
+        .container-nav {
             width: 100vw;
             text-wrap: nowrap;
             white-space: nowrap;
-
         }
 
-        @media (max-width:950px){
-
-            .nav-links{
+        @media (max-width:950px) {
+            .nav-links {
                 display: none;
             }
-
-            .container strong{
+            .container strong {
                 display: block;
             }
-
             .stats .container {
                 display: grid;
                 grid-template-columns: 1fr 1fr;
                 place-items: center;
                 gap: 55px;
             }
-            
-            
         }
 
         @media (max-width: 1110px) {
-
             .hero .container {
                 display: flex;
                 flex-direction: column-reverse;
                 align-items: center;
                 gap: 60px;
             }
-
-            
         }
+
         @media (max-width:1000px) {
-            .footer-grid{
+            .footer-grid {
                 grid-template-columns: 1fr 1fr;
-                
-                /* place-items: center; */
             }
-
-            
         }
+
         @media (max-width:670px) {
-            .footer-grid{
+            .footer-grid {
                 grid-template-columns: 1fr 1fr;
                 grid-template-rows: 1fr 1fr 1fr;
-
                 grid-template-areas: "x x"
                                      "y z" 
                                      "a a";
-
-                /* place-items: center; */
             }
-            .code-academy-footer{
+            .code-academy-footer {
                 grid-area: x;
             }
-            .access{
+            .access {
                 grid-area: y;
             }
-            .support{
+            .support {
                 grid-area: z;
             }
-            .contactus{
+            .contactus {
                 grid-area: a;
             }
-
-
-
-            
         }
+
         @media (max-width: 490px) {
-            .hero-content{
+            .hero-content {
                 font-size: smaller;
             }
-            
         }
-
-        
-
-
     </style>
 </head>
 <body>
@@ -879,7 +941,6 @@
             <li><a href="#">مقالات</a></li>
             <li><a href="#" class="nav-cta">ثبت‌نام</a></li>
         </ul>
-
     </div>
 
     <!-- ===== NAVBAR ===== -->
@@ -889,8 +950,6 @@
                 <i class="fas fa-code"></i>
                 کد<span>آکادمی</span>
             </a>
-
-            <!-- <input type="text" style="max-width: 25vw;"> -->
             <ul class="nav-links">
                 <li><a href="#">خانه</a></li>
                 <li><a href="#">دوره‌ها</a></li>
@@ -898,8 +957,12 @@
                 <li><a href="#">مقالات</a></li>
                 <li><a href="#" class="nav-cta">ثبت‌نام</a></li>
             </ul>
-            <strong onclick="toggle_menu()">|||</strong>
-            
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <button class="theme-toggle" id="themeToggle" aria-label="تغییر تم">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <strong onclick="toggle_menu()">|||</strong>
+            </div>
         </div>
     </header>
 
@@ -926,21 +989,20 @@
                 </div>
             </div>
             <div class="hero-image">
-                <!-- تصویر SVG جایگزین برای نمایش کدنویسی -->
-                <svg width="540" height="400" viewBox="0 0 540 400" fill="none" xmlns="http://www.w3.org/2000/svg" style="border-radius:28px; box-shadow:0 20px 25px -5px rgba(0,0,0,0.1); background:#fff; padding:20px;">
-                    <rect x="20" y="20" width="500" height="360" rx="16" fill="#1e293b"/>
-                    <rect x="40" y="40" width="460" height="30" rx="8" fill="#334155"/>
+                <svg width="540" height="400" viewBox="0 0 540 400" fill="none" xmlns="http://www.w3.org/2000/svg" style="border-radius:28px; box-shadow:var(--shadow-xl); background:var(--surface); padding:20px;">
+                    <rect x="20" y="20" width="500" height="360" rx="16" fill="var(--secondary)"/>
+                    <rect x="40" y="40" width="460" height="30" rx="8" fill="var(--surface-alt)"/>
                     <circle cx="60" cy="55" r="6" fill="#ef4444"/>
                     <circle cx="80" cy="55" r="6" fill="#f59e0b"/>
                     <circle cx="100" cy="55" r="6" fill="#10b981"/>
-                    <rect x="40" y="90" width="220" height="16" rx="4" fill="#2563eb" opacity="0.8"/>
-                    <rect x="40" y="120" width="320" height="16" rx="4" fill="#475569"/>
-                    <rect x="40" y="150" width="180" height="16" rx="4" fill="#2563eb" opacity="0.6"/>
-                    <rect x="40" y="180" width="280" height="16" rx="4" fill="#475569"/>
-                    <rect x="40" y="210" width="140" height="16" rx="4" fill="#f59e0b" opacity="0.7"/>
-                    <rect x="40" y="240" width="360" height="16" rx="4" fill="#475569"/>
-                    <rect x="40" y="270" width="200" height="16" rx="4" fill="#2563eb" opacity="0.5"/>
-                    <rect x="40" y="300" width="300" height="16" rx="4" fill="#475569"/>
+                    <rect x="40" y="90" width="220" height="16" rx="4" fill="var(--primary)" opacity="0.8"/>
+                    <rect x="40" y="120" width="320" height="16" rx="4" fill="var(--text-muted)"/>
+                    <rect x="40" y="150" width="180" height="16" rx="4" fill="var(--primary)" opacity="0.6"/>
+                    <rect x="40" y="180" width="280" height="16" rx="4" fill="var(--text-muted)"/>
+                    <rect x="40" y="210" width="140" height="16" rx="4" fill="var(--accent)" opacity="0.7"/>
+                    <rect x="40" y="240" width="360" height="16" rx="4" fill="var(--text-muted)"/>
+                    <rect x="40" y="270" width="200" height="16" rx="4" fill="var(--primary)" opacity="0.5"/>
+                    <rect x="40" y="300" width="300" height="16" rx="4" fill="var(--text-muted)"/>
                     <rect x="40" y="330" width="260" height="16" rx="4" fill="#10b981" opacity="0.7"/>
                 </svg>
             </div>
@@ -978,7 +1040,6 @@
                 <div class="underline"></div>
             </div>
             <div class="course-grid">
-                <!-- Course 1 -->
                 <div class="course-card reveal">
                     <div class="course-icon">
                         <i class="fab fa-js"></i>
@@ -994,7 +1055,6 @@
                     </div>
                     <a href="#" class="course-link">مشاهده دوره</a>
                 </div>
-                <!-- Course 2 -->
                 <div class="course-card reveal">
                     <div class="course-icon">
                         <i class="fab fa-python"></i>
@@ -1010,7 +1070,6 @@
                     </div>
                     <a href="#" class="course-link">مشاهده دوره</a>
                 </div>
-                <!-- Course 3 -->
                 <div class="course-card reveal">
                     <div class="course-icon">
                         <i class="fab fa-react"></i>
@@ -1080,7 +1139,6 @@
                 <div class="underline"></div>
             </div>
             <div class="testimonial-grid">
-                <!-- Testimonial 1 -->
                 <div class="testimonial-card reveal">
                     <i class="fas fa-quote-right quote-icon"></i>
                     <div class="stars">
@@ -1097,7 +1155,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Testimonial 2 -->
                 <div class="testimonial-card reveal">
                     <i class="fas fa-quote-right quote-icon"></i>
                     <div class="stars">
@@ -1114,7 +1171,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- Testimonial 3 -->
                 <div class="testimonial-card reveal">
                     <i class="fas fa-quote-right quote-icon"></i>
                     <div class="stars">
@@ -1200,6 +1256,24 @@
 
     <!-- ===== JAVASCRIPT ===== -->
     <script>
+        // ===== THEME TOGGLE =====
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+
+        // بارگذاری تم ذخیره شده
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            body.classList.add('dark');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark');
+            const isDark = body.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+        });
+
         // ===== SCROLL REVEAL ANIMATION =====
         const revealElements = document.querySelectorAll('.reveal');
 
@@ -1236,10 +1310,8 @@
         // ===== SMOOTH SCROLL FOR ANCHOR LINKS =====
         document.querySelectorAll('a[href="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
-                // فقط برای لینک‌های منو که href="#"
                 if (this.getAttribute('href') === '#') {
                     e.preventDefault();
-                    // اگر لینک منو باشد، به بالای صفحه اسکرول کن
                     if (this.closest('.nav-links')) {
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                     }
@@ -1248,8 +1320,7 @@
         });
 
         function toggle_menu(){
-            document.getElementById('menu').classList.toggle('menu-open')
-
+            document.getElementById('menu').classList.toggle('menu-open');
         }
     </script>
 </body>
